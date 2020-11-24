@@ -23,9 +23,17 @@
             "aot": true,
             "assets": [
               "apps/github-search/src/favicon.ico",
-              "apps/github-search/src/assets"
+              "apps/github-search/src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
             ],
-            "styles": ["apps/github-search/src/styles.scss"],
+            "styles": [
+              "apps/github-search/src/theme.less",
+              "apps/github-search/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -79,7 +87,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/github-search/src/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/github-search/src/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -112,7 +122,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/github-search-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/github-search-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
