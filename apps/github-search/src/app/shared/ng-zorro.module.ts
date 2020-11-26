@@ -17,6 +17,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
 const MODULES = [
   NzGridModule,
   NzLayoutModule,
@@ -35,6 +36,7 @@ const MODULES = [
   NzTagModule,
   NzBadgeModule,
   NzSpaceModule,
+  NzAlertModule,
 ];
 
 @NgModule({

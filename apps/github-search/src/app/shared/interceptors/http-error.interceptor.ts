@@ -26,7 +26,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       retry(1),
       catchError((error: HttpErrorResponse) => {
         let throwErrorMessage = 'Error en la aplicación';
-
+        console.log(error);
         if (error.error instanceof ErrorEvent) {
           // client-side error
           throwErrorMessage = `Error: ${error.error.message}`;
@@ -36,8 +36,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
           switch (error.status) {
             case 403:
-              this.modalService.error(throwErrorMessage);
-              this.router.navigate(['/auth/expirado']);
+              throwErrorMessage = serverSideMessage.message;
+              this.modalService.error(serverSideMessage.message, {
+                nzDuration: 5000,
+              });
               break;
 
             default:
