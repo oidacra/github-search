@@ -11,6 +11,7 @@ import {
 import {
   geItemsByPage,
   gePageIndex,
+  getGitHubError,
   getTotalCount,
   getUsers,
   isLoading,
@@ -19,34 +20,45 @@ import {
 import { GithubService } from './../github-search.service';
 @Component({
   selector: 'github-search-page',
-  template: `<nz-layout>
-    <nz-layout>
-      <nz-content
-        ><div nz-row nzJustify="center" class="inner-container">
-          <div nz-col nzSpan="18">
-            <github-search-input
-              [title]="'Github users finder'"
-              [isLoading]="isLoading$ | async"
-              (textToFind)="findUser($event)"
-            >
-            </github-search-input>
-            <nz-divider></nz-divider>
-          </div>
+  template: `
+    <ng-container *ngIf="errorMsg$ | async as errorMsg">
+      <nz-alert
+        nzBanner
+        nzType="error"
+        [nzMessage]="errorMsg"
+        nzCloseable
+      ></nz-alert>
+    </ng-container>
 
-          <div nz-col nzSpan="18">
-            <github-search-results
-              [users]="items$ | async"
-              [isLoading]="isLoading$ | async"
-              [pageSize]="itemsByPage$ | async"
-              [pageIndex]="currentPage$ | async"
-              [total_count]="total_count$ | async"
-              (itemsByPage)="changeItemsByPage($event)"
-              (currentPageIndex)="changePageIndex($event)"
-            ></github-search-results>
-          </div></div
-      ></nz-content>
+    <nz-layout>
+      <nz-layout>
+        <nz-content
+          ><div nz-row nzJustify="center" class="inner-container">
+            <div nz-col nzSpan="18">
+              <github-search-input
+                [title]="'Github users finder'"
+                [isLoading]="isLoading$ | async"
+                (textToFind)="findUser($event)"
+              >
+              </github-search-input>
+              <nz-divider></nz-divider>
+            </div>
+
+            <div nz-col nzSpan="18">
+              <github-search-results
+                [users]="items$ | async"
+                [isLoading]="isLoading$ | async"
+                [pageSize]="itemsByPage$ | async"
+                [pageIndex]="currentPage$ | async"
+                [total_count]="total_count$ | async"
+                (itemsByPage)="changeItemsByPage($event)"
+                (currentPageIndex)="changePageIndex($event)"
+              ></github-search-results>
+            </div></div
+        ></nz-content>
+      </nz-layout>
     </nz-layout>
-  </nz-layout> `,
+  `,
   styles: [
     `
       :host {
@@ -68,6 +80,8 @@ export class GithubSearchPageComponent {
 
   itemsByPage$ = this.store.select(geItemsByPage);
   currentPage$ = this.store.select(gePageIndex);
+
+  errorMsg$ = this.store.select(getGitHubError);
 
   constructor(private store: Store, private githubService: GithubService) {}
 

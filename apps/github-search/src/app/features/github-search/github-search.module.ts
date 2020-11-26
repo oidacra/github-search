@@ -13,6 +13,8 @@ import { GithubSearchInputComponent } from './components/github-search-input/git
 import { GithubSearchResultsComponent } from './components/github-search-results/github-search-results.component';
 import { GithubService } from './github-search.service';
 import { GithubSearchRoutingModule } from './github-search-routing.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpErrorInterceptor } from '../../shared/interceptors/http-error.interceptor';
 @NgModule({
   declarations: [
     GithubSearchPageComponent,
@@ -27,6 +29,13 @@ import { GithubSearchRoutingModule } from './github-search-routing.module';
     StoreModule.forFeature(fromGithub.GITHUB_FEATURE_KEY, fromGithub.reducer),
     EffectsModule.forFeature([GitHubEffects]),
   ],
-  providers: [GithubService],
+  providers: [
+    GithubService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true,
+    },
+  ],
 })
 export class GithubSearchModule {}
