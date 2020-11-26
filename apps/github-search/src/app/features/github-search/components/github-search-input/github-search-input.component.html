@@ -1,0 +1,36 @@
+<h1 nz-typography>{{ title }}</h1>
+<nz-input-group
+  nzSize="large"
+  nzSearch
+  [nzAddOnAfter]="suffixIconButton"
+  [nzSuffix]="inputClearTpl"
+>
+  <input
+    type="text"
+    [(ngModel)]="inputValue"
+    nz-input
+    placeholder="User to find (can use username or email)"
+  />
+</nz-input-group>
+<ng-template #suffixIconButton>
+  <button
+    [nzLoading]="isLoading"
+    nz-button
+    nzType="primary"
+    nzSize="large"
+    nzSearch
+    (click)="find()"
+  >
+    Search
+  </button>
+</ng-template>
+<ng-template #inputClearTpl
+  ><i
+    nz-icon
+    class="ant-input-clear-icon"
+    nzTheme="fill"
+    nzType="close-circle"
+    *ngIf="inputValue"
+    (click)="clearInput()"
+  ></i
+></ng-template>

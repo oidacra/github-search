@@ -1,0 +1,82 @@
+<ng-container *ngIf="!isLoading; else loading">
+  <div nz-row [nzGutter]="16" class="inner-list-container">
+    <ng-container *ngFor="let user of users">
+      <div
+        nz-col
+        class="gutter-row"
+        nzXs="24"
+        nzSm="12"
+        nzMd="12"
+        nzLg="8"
+        nzXl="6"
+      >
+        <github-search-card [user]="user"></github-search-card>
+      </div>
+    </ng-container>
+  </div>
+
+  <div nz-row nzJustify="center">
+    <nz-pagination
+      [nzShowTotal]="totalTemplate"
+      [nzPageIndex]="pageIndex"
+      [nzTotal]="total_count"
+      nzShowSizeChanger
+      [nzPageSize]="pageSize"
+      [nzPageSizeOptions]="[12, 24, 36]"
+      (nzPageIndexChange)="nzPageIndexChange($event)"
+      (nzPageSizeChange)="nzPageSizeChange($event)"
+    ></nz-pagination>
+  </div>
+</ng-container>
+
+<ng-template #totalTemplate let-total> Total {{ total }} items </ng-template>
+<ng-template #loading>
+  <div class="loading">
+    <div nz-row [nzGutter]="16" class="inner-list-container">
+      <div
+        nz-col
+        class="gutter-row"
+        nzXs="24"
+        nzSm="12"
+        nzMd="12"
+        nzLg="8"
+        nzXl="6"
+      >
+        <nz-card [nzBordered]="false" [nzLoading]="true"> > </nz-card>
+      </div>
+      <div
+        nz-col
+        class="gutter-row"
+        nzXs="24"
+        nzSm="12"
+        nzMd="12"
+        nzLg="8"
+        nzXl="6"
+      >
+        <nz-card [nzBordered]="false" [nzLoading]="true"> > </nz-card>
+      </div>
+      <div
+        nz-col
+        class="gutter-row"
+        nzXs="24"
+        nzSm="12"
+        nzMd="12"
+        nzLg="8"
+        nzXl="6"
+      >
+        <nz-card [nzBordered]="false" [nzLoading]="true"> > </nz-card>
+      </div>
+      <div
+        nz-col
+        class="gutter-row"
+        nzXs="24"
+        nzSm="12"
+        nzMd="12"
+        nzLg="8"
+        nzXl="6"
+      >
+        <nz-card [nzBordered]="false" [nzLoading]="true"> > </nz-card>
+      </div>
+    </div>
+  </div>
+</ng-template>

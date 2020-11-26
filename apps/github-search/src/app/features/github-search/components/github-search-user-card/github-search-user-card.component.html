@@ -1,0 +1,42 @@
+<nz-card [nzCover]="coverTemplate" [nzActions]="[actionGoGithub]">
+  <nz-card-meta
+    [nzTitle]="user.login"
+    [nzDescription]="user.bio"
+  ></nz-card-meta>
+
+  <div class="location" *ngIf="user.location">
+    {{ user.location }}
+  </div>
+
+  <div class="tags">
+    <nz-tag [nzColor]="'orange'">
+      <span> {{ user.followers }} Followers</span>
+    </nz-tag>
+
+    <nz-tag [nzColor]="'gold'">
+      <span> {{ user.following }} Following</span>
+    </nz-tag>
+
+    <nz-tag [nzColor]="'geekblue'">
+      <span> {{ user.public_repos }} Public repos</span>
+    </nz-tag>
+
+    <nz-tag [nzColor]="'purple'">
+      <span> {{ user.public_gists }} Public gists</span>
+    </nz-tag>
+  </div>
+</nz-card>
+
+<ng-template #coverTemplate>
+  <img [alt]="user.name" [src]="user.avatar_url" />
+</ng-template>
+
+<ng-template #actionGoGithub>
+  <a
+    [href]="user.html_url"
+    target="_blank"
+    nz-tooltip
+    nzTooltipTitle="Go to Github profile"
+    ><i nz-icon nzType="github" nzTheme="outline"></i
+  ></a>
+</ng-template>
